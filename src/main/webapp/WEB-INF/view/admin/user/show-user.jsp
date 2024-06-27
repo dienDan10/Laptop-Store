@@ -1,0 +1,75 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="laptopstore" />
+    <meta name="author" content="Hỏi Dân IT" />
+    <title>Users</title>
+    <link href="/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+<%@include file="../layout/header.jsp"%>
+<div id="layoutSidenav">
+    <%@include file="../layout/side-bar.jsp"%>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Dashboard</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Users</li>
+                </ol>
+                <div class="row">
+                    <div class="col col-md-12 mx-auto">
+                        <div class="d-flex flex-row justify-content-between mb-3">
+                            <h3 class="fs-3">User table</h3>
+                            <a class="btn btn-primary" href="/admin/user/create">Create user</a>
+                        </div>
+                        <hr>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Full Name</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="user" items="${users}">
+                                <tr>
+                                    <td>${user.id}</td>
+                                    <td>${user.email}</td>
+                                    <td>${user.fullName}</td>
+                                    <td>
+                                        <a href="/admin/user/${user.id}" class="btn btn-success">View</a>
+                                        <a href="/admin/user/update/${user.id}" class="btn btn-warning">Update</a>
+                                        <a href="/admin/user/delete/${user.id}" class="btn btn-danger"
+                                           onclick="if (!confirm('Do you want to delete?')) return false"
+                                        >Delete</a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <%@include file="../layout/footer.jsp"%>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+<script src="/js/scripts.js"></script>
+
+</body>
+
+</html>
